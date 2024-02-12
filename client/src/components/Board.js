@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cell from "./cell";
 import { createPuzzle } from "./puzzle";
+import { NumButtons } from "./controls";
 
 const Board = () => {
   const [selectedCell, setSelectedCell] = useState();
@@ -18,21 +19,24 @@ const Board = () => {
   console.log("puzzle", puzzle);
 
   return (
-    <div className="Board container mx-auto w-max">
-      {" "}
-      {board.map((row, i) => {
-        return (
-          <div
-            className="grid grid-cols-9 content-center"
-            key={`row-${i}`}
-          >
-            {" "}
-            {row.map((col, j) => {
-              return board[i][j];
-            })}{" "}
-          </div>
-        );
-      })}{" "}
+    <div className="container mx-auto w-max">
+      <div className="board mb-3">
+        {" "}
+        {board.map((row, i) => {
+          return (
+            <div
+              className="grid grid-cols-9 content-center"
+              key={`row-${i}`}
+            >
+              {" "}
+              {row.map((col, j) => {
+                return board[i][j];
+              })}{" "}
+            </div>
+          );
+        })}{" "}
+      </div>{" "}
+      <NumButtons> </NumButtons>{" "}
     </div>
   );
 };
