@@ -13,6 +13,7 @@ export const createPuzzle = () => {
 
   puzzle = fillDiagonalSquares(puzzle);
   fillCells(puzzle, 0, 0);
+  puzzle = removeCells(puzzle, 45);
 
   console.log(puzzle);
 
@@ -91,6 +92,16 @@ const checkSquare = (puzzle, x, y, value) => {
     }
   }
   return true;
+};
+
+const removeCells = (puzzle, n) => {
+  for (let i = 0; i < n; i++) {
+    let xRan = Math.floor(Math.random() * 9);
+    let yRan = Math.floor(Math.random() * 9);
+
+    puzzle[yRan][xRan] = "";
+  }
+  return puzzle;
 };
 
 // createPuzzle();
