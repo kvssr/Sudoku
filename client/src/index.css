@@ -14,5 +14,9 @@ code {
 }
 
 .selected {
-  background-color: rgb(38, 138, 219);
+  background-color: rgba(38, 138, 219, 0.836);
+}
+
+.highlight {
+  background-color: rgba(89, 224, 248, 0.281);
 }
