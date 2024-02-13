@@ -8,6 +8,7 @@ const Cell = ({ props, selectCell, selectedCell }) => {
     ? "highlight"
     : "";
   let selected = "";
+  let textColour = props.prefilled ? "text-black" : "text-blue-700";
   if (selectedCell) {
     // console.log("ids", selectedCell.id, props.id);
     selected = Number(selectedCell.id) === props.id ? "selected" : "";

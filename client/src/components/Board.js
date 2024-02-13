@@ -5,7 +5,7 @@ import { NumButtons } from "./controls";
 
 const Board = () => {
   const [selectedCell, setSelectedCell] = useState();
-  // console.log("🚀 ~ Board ~ selectedCell:", selectedCell);
+  console.log("🚀 ~ Board ~ selectedCell:", selectedCell);
   const [puzzle, setPuzzle] = useState([]);
 
   useEffect(() => {
@@ -17,6 +17,12 @@ const Board = () => {
   const board = generateBoard(selectedCell, setSelectedCell, puzzle);
   console.log("🚀 ~ Board ~ board:", board);
   console.log("puzzle", puzzle);
+
+  const selectInput = (e) => {
+    console.log("clicked", e.target);
+    let value = e.target.innerText;
+    selectedCell.innerText = value;
+  };
 
   return (
     <div className="container mx-auto w-max">
@@ -36,7 +42,7 @@ const Board = () => {
           );
         })}{" "}
       </div>{" "}
-      <NumButtons> </NumButtons>{" "}
+      <NumButtons selectInput={selectInput}> </NumButtons>{" "}
     </div>
   );
 };
@@ -68,7 +74,7 @@ const generateBoard = (selectedCell, setSelectedCell, puzzle) => {
             value: puzzle[i][j],
             id: j + 1 + 9 * i,
             selected: false,
-            prefilled: false,
+            prefilled: true,
             x: j,
             y: i,
           }}
