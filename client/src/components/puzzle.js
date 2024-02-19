@@ -15,7 +15,7 @@ export const createPuzzle = () => {
   fillCells(puzzle, 0, 0);
   puzzle = removeCells(puzzle, 45);
 
-  console.log(puzzle);
+  // console.log(puzzle);
 
   return puzzle;
 };
@@ -38,14 +38,14 @@ const fillDiagonalSquares = (puzzle) => {
   return puzzle;
 };
 
-const fillCells = (puzzle, x, y) => {
+export const fillCells = (puzzle, x, y) => {
   if (y === 8 && x === 9) return true;
   if (x === 9) {
     x = 0;
     y++;
   }
 
-  if (puzzle[y][x] !== 0) {
+  if (puzzle[y][x] !== 0 && puzzle[y][x] !== "") {
     return fillCells(puzzle, x + 1, y);
   }
 
@@ -61,34 +61,43 @@ const fillCells = (puzzle, x, y) => {
   return false;
 };
 
-const checkValid = (puzzle, x, y, value) => {
+export const checkValid = (puzzle, x, y, value, debug = false) => {
   let valid = true;
-  if (!checkRow(puzzle, y, value)) return false;
-  if (!checkCol(puzzle, x, value)) return false;
-  if (!checkSquare(puzzle, x, y, value)) return false;
+  if (!checkRow(puzzle, y, value, debug)) return false;
+  if (!checkCol(puzzle, x, value, debug)) return false;
+  if (!checkSquare(puzzle, x, y, value, debug)) return false;
 
   return valid;
 };
 
-const checkRow = (puzzle, y, value) => {
-  if (puzzle[y].includes(value)) return false;
-  return true;
-};
-
-const checkCol = (puzzle, x, value) => {
-  for (let i = 0; i < 9; i++) {
-    if (puzzle[i][x] === value) return false;
+const checkRow = (puzzle, y, value, debug = false) => {
+  if (puzzle[y].includes(value)) {
+    if (debug) console.log("Checking validity Row False", puzzle, y, value);
+    return false;
   }
   return true;
 };
 
-const checkSquare = (puzzle, x, y, value) => {
+const checkCol = (puzzle, x, value, debug = false) => {
+  for (let i = 0; i < 9; i++) {
+    if (puzzle[i][x] === value) {
+      if (debug) console.log("Checking validity Col False", puzzle);
+      return false;
+    }
+  }
+  return true;
+};
+
+const checkSquare = (puzzle, x, y, value, debug = false) => {
   let sqX = Math.floor(x / 3);
   let sqY = Math.floor(y / 3);
   //   console.log(sqY, sqX);
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if (puzzle[sqY * 3 + i][sqX * 3 + j] === value) return false;
+      if (puzzle[sqY * 3 + i][sqX * 3 + j] === value) {
+        if (debug) console.log("Checking validity Square False", puzzle);
+        return false;
+      }
     }
   }
   return true;

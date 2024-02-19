@@ -22,7 +22,7 @@ const Cell = ({ props, selectCell, selectedCell }) => {
     <div
       id={props.id}
       key={props.id}
-      className={`h-10 w-10 border border-slate-800 ${border} ${highlighted} ${selected}`}
+      className={`h-10 w-10 border border-slate-800 ${border} ${highlighted} ${selected} ${textColour}`}
       onClick={selectCell}
     >
       {" "}
