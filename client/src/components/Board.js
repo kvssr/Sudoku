@@ -98,7 +98,7 @@ const Board = () => {
         handleNewGameBtn={handleNewGameBtn}
       >
         {" "}
-      </GameButtons>
+      </GameButtons>{" "}
     </div>
   );
 };
