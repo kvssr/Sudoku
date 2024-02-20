@@ -26,6 +26,20 @@ code {
   background-color: aliceblue;
 }
 
-.buttonList {
+.boardCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controlBtn:hover {
+  background-color: aquamarine;
+}
+
+.inputCell {
   background-color: aliceblue;
+}
+
+.inputCell:hover {
+  background-color: rgba(89, 224, 248, 0.281);
 }

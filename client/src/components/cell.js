@@ -29,7 +29,7 @@ const Cell = ({ props, selectCell, selectedCell }) => {
     <div
       id={props.id}
       key={props.id}
-      className={`cursor-pointer h-10 w-10 border border-slate-800 ${border} ${highlighted} ${selected} ${textColour} ${boldText}`}
+      className={`cursor-pointer boardCell h-10 w-10 border border-slate-800 ${border} ${highlighted} ${selected} ${textColour} ${boldText}`}
       onClick={selectCell}
     >
       {" "}
