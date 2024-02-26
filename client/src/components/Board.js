@@ -2,21 +2,38 @@ import React, { useEffect, useState } from "react";
 import Cell from "./cell";
 import { createPuzzle, fillCells, checkValid } from "./puzzle";
 import { NumButtons, GameButtons } from "./controls";
+import { socket } from "../socket/socket";
 
-const Board = () => {
+const Board = ({ game }) => {
   const [selectedCell, setSelectedCell] = useState(null);
   // console.log("🚀 ~ Board ~ selectedCell:", selectedCell);
-  const [puzzle, setPuzzle] = useState(createPuzzle());
-  console.log("🚀 ~ Board ~ puzzle:", puzzle);
-  const [board, setBoard] = useState(generateBoard(puzzle));
+  // const [puzzle, setPuzzle] = useState(createPuzzle());
+  const [puzzle, setPuzzle] = useState();
+  // console.log("🚀 ~ Board ~ puzzle:", puzzle);
+  const [board, setBoard] = useState(game);
   console.log("🚀 ~ Board ~ board:", board);
 
-  useEffect(() => {
-    setSelectedCell(null);
-    setBoard(generateBoard(puzzle));
-  }, [puzzle]);
+  // useEffect(() => {
+  //   setSelectedCell(null);
+  //   setBoard(generateBoard(puzzle));
+  // }, [puzzle]);
 
-  if (puzzle < 1) return "Loading";
+  // if (puzzle < 1) return "Loading";
+
+  useEffect(() => {
+    const onGameMoveUpdated = (move) => {
+      const { x, y, value, valid } = move;
+      board[y][x].value = value;
+      board[y][x].valid = valid;
+      setBoard([...board]);
+    };
+
+    socket.on("game move updated", onGameMoveUpdated);
+
+    return () => {
+      socket.off("game move updated", onGameMoveUpdated);
+    };
+  }, []);
 
   const selectInput = (e) => {
     e.preventDefault();
@@ -28,13 +45,14 @@ const Board = () => {
     let x = id % 9;
     let y = Math.floor(id / 9);
     value = Number(e.target.innerText);
-    const valid = checkValid(puzzle, x, y, value, true);
-    puzzle[y][x] = value;
-    let tempPuzzle = copyArray(puzzle);
-    const solvable = fillCells(tempPuzzle, 0, 0);
-    board[y][x].value = value;
-    board[y][x].valid = valid && solvable;
-    setBoard([...board]);
+    socket.emit("game move selected", { x: x, y: y, value: value });
+    // const valid = checkValid(puzzle, x, y, value, true);
+    // puzzle[y][x] = value;
+    // let tempPuzzle = copyArray(puzzle);
+    // const solvable = fillCells(tempPuzzle, 0, 0);
+    // board[y][x].value = value;
+    // board[y][x].valid = valid && solvable;
+    // setBoard([...board]);
   };
 
   const copyArray = (array) => {
