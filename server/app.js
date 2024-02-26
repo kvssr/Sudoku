@@ -103,11 +103,43 @@ io.on("connection", (socket) => {
     console.log("Game moved", move);
     const { x, y, value } = move;
     const room = users[socket.id];
+    if (rooms[room].board[y][x].prefilled) {
+      socket.emit("chat message", "Not a valid move");
+      return;
+    }
+    if (rooms[room].board[y][x].value === value) {
+      return;
+    }
     let puzzle = rooms[room].puzzle;
     const valid = checkValidMove(puzzle, move);
     rooms[room].board[y][x].value = value;
     rooms[room].board[y][x].valid = valid;
     io.to(room).emit("game move updated", { ...move, valid: valid });
+  });
+
+  socket.on("game move erased", (move) => {
+    console.log("Game moved", move);
+    const { x, y, value } = move;
+    const room = users[socket.id];
+    if (rooms[room].board[y][x].prefilled) {
+      socket.emit("chat message", "Not a valid move");
+      return;
+    }
+
+    rooms[room].board[y][x].value = "";
+    io.to(room).emit("game move erased", move);
+  });
+
+  socket.on("game new", () => {
+    console.log("creating new game");
+    const room = users[socket.id];
+
+    let puzzle = createPuzzle();
+    let board = generateBoard(puzzle);
+    rooms[room].puzzle = puzzle;
+    rooms[room].board = board;
+
+    io.to(room).emit("game new", board);
   });
 });
 

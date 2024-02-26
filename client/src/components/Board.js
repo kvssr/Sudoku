@@ -8,7 +8,7 @@ const Board = ({ game }) => {
   const [selectedCell, setSelectedCell] = useState(null);
   // console.log("🚀 ~ Board ~ selectedCell:", selectedCell);
   // const [puzzle, setPuzzle] = useState(createPuzzle());
-  const [puzzle, setPuzzle] = useState();
+  // const [puzzle, setPuzzle] = useState();
   // console.log("🚀 ~ Board ~ puzzle:", puzzle);
   const [board, setBoard] = useState(game);
   console.log("🚀 ~ Board ~ board:", board);
@@ -28,10 +28,23 @@ const Board = ({ game }) => {
       setBoard([...board]);
     };
 
+    const onGameMoveErased = ({ x, y }) => {
+      board[y][x].value = "";
+      setBoard([...board]);
+    };
+
+    const onGameNew = (board) => {
+      setBoard(...[board]);
+    };
+
     socket.on("game move updated", onGameMoveUpdated);
+    socket.on("game move erased", onGameMoveErased);
+    socket.on("game new", onGameNew);
 
     return () => {
       socket.off("game move updated", onGameMoveUpdated);
+      socket.off("game move erased", onGameMoveErased);
+      socket.off("game new", onGameNew);
     };
   }, []);
 
@@ -68,7 +81,8 @@ const Board = ({ game }) => {
   };
 
   const handleNewGameBtn = (e) => {
-    setPuzzle(createPuzzle());
+    // setPuzzle(createPuzzle());
+    socket.emit("game new");
     // setBoard(generateBoard(puzzle));
   };
 
@@ -77,11 +91,11 @@ const Board = ({ game }) => {
     const id = selectedCell.id;
     let x = id % 9;
     let y = Math.floor(id / 9);
-
-    if (!board[y][x].prefilled) {
-      board[y][x].value = "";
-    }
-    setBoard([...board]);
+    socket.emit("game move erased", { x: x, y: y });
+    // if (!board[y][x].prefilled) {
+    //   board[y][x].value = "";
+    // }
+    // setBoard([...board]);
   };
 
   return (
