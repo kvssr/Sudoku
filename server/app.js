@@ -33,6 +33,10 @@ app.get("/users", (req, res) => {
   res.send(users);
 });
 
+app.get("/rooms", (req, res) => {
+  res.send(rooms);
+});
+
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
 
