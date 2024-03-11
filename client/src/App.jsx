@@ -3,6 +3,7 @@ import "./App.css";
 import Board from "./components/Board";
 import Homepage from "./scenes/homepage";
 import { socket } from "./socket/socket";
+import "./assets/shared.css";
 
 function App() {
   const [room, setRoom] = useState();
@@ -36,11 +37,17 @@ function App() {
 
   return (
     <div className="App">
-      <div className="Header h-20">
-        <p className="m-auto"> Sudoku </p> <p className="m-auto"> {room} </p>{" "}
-      </div>
+      <header>
+        <h2>Sudoku</h2>
+        <h1>{room}</h1>
+      </header>
       <div>
-        {room && game && <Board game={game} />}
+        {room && game && (
+          <Board
+            game={game}
+            setGame={setGame}
+          />
+        )}
         {!game && <Homepage />}
       </div>
     </div>
