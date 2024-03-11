@@ -29,9 +29,13 @@ export const ConnectionManager = () => {
           <input
             id="roomInput"
             name="room"
-            className="m-2"
+            className="roomInput"
+            placeholder="Room code"
           />
-          <button type="submit"> Join </button>
+          <button type="submit">
+            {" "}
+            <p>Join</p>{" "}
+          </button>
         </form>
       </div>
       <div className="createRow">
@@ -39,7 +43,7 @@ export const ConnectionManager = () => {
           type="button"
           onClick={createRoom}
         >
-          Create
+          <p>Create</p>
         </button>
       </div>
     </div>
