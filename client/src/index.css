@@ -32,12 +32,27 @@ code {
   justify-content: center;
 }
 
+.gamebuttonList {
+  display: flex;
+  justify-content: space-between;
+}
+
 .controlBtn {
-  background-color: #ff6a3d;
+  border: 1px solid #E9DDCE;
+  border-radius: 5%;
+  margin-top: 0.75rem;
+  padding: 10px;
+  color: #E9DDCE;
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
 }
 
 .controlBtn:hover {
-  background-color: #f4db7d;
+  background-color: #E9DDCE;
+  color: #314251;
 }
 
 .inputCell {
@@ -48,7 +63,49 @@ code {
   background-color: #f4db7d;
 }
 
-.roomInput {
+.joinRow {
+  display: flex;
   margin-top: 30px;
-  margin-right: 10px;
+}
+
+.createCol {
+  border: 1px solid #E9DDCE;
+  border-radius: 5%;
+  margin: 5px;
+  padding: 10px;
+  color: #E9DDCE;
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+}
+
+.createCol:hover {
+  background-color: #E9DDCE;
+  color: #374875;
+}
+
+.joinCol {
+  border: 1px solid #E9DDCE;
+  border-radius: 5%;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  color: #E9DDCE;
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+}
+
+.joinCol:hover {
+  background-color: #E9DDCE;
+  color: #314251;
+}
+
+.roomInput {
+  background-color: #fffcf9;
+  color: #314251;
 }

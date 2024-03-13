@@ -11,7 +11,7 @@ export const NumButtons = ({ selectInput }) => {
         onClick={selectInput}
         key={`ib-${i}`}
       >
-        {i}{" "}
+        {i}
       </div>
     );
   }
@@ -20,19 +20,19 @@ export const NumButtons = ({ selectInput }) => {
 
 export const GameButtons = ({ handleEraseBtn, handleNewGameBtn }) => {
   return (
-    <div className="gamebuttonList grid grid-cols-9 mt-3">
+    <div className="gamebuttonList">
       <div
-        className="cursor-pointer bg-cyan-800 eraseBtn controlBtn py-0 border col-span-2 col-start-2"
+        className="cursor-pointer eraseBtn controlBtn "
         onClick={handleEraseBtn}
       >
-        Erase{" "}
-      </div>{" "}
+        Erase
+      </div>
       <div
-        className="cursor-pointer bg-cyan-800 newGameBtn controlBtn py-0 border col-span-2 col-start-7"
+        className="cursor-pointer newGameBtn controlBtn"
         onClick={handleNewGameBtn}
       >
-        New Game{" "}
-      </div>{" "}
+        New Game
+      </div>
     </div>
   );
 };

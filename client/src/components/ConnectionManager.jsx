@@ -23,29 +23,28 @@ export const ConnectionManager = () => {
   };
 
   return (
-    <div className="">
-      <div className="joinRow">
-        <form onSubmit={connect}>
-          <input
-            id="roomInput"
-            name="room"
-            className="roomInput"
-            placeholder="Room code"
-          />
-          <button type="submit">
-            {" "}
-            <p>Join</p>{" "}
-          </button>
-        </form>
-      </div>
-      <div className="createRow">
-        <button
-          type="button"
-          onClick={createRoom}
-        >
-          <p>Create</p>
-        </button>
-      </div>
+    <div className="joinRow">
+      <button
+        type="button"
+        className="createCol"
+        onClick={createRoom}
+      >
+        Create
+      </button>
+
+      <form
+        onSubmit={connect}
+        className="joinCol"
+      >
+        <input
+          id="roomInput"
+          name="room"
+          className="roomInput"
+          placeholder="Room code"
+          size={7}
+        />
+        <button type="submit">Join</button>
+      </form>
     </div>
   );
 };
